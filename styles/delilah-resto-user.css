@@ -1,0 +1,144 @@
+@media screen and (min-width: 300px) and (max-width: 720px){
+*{
+    margin: 0;
+    padding: 0; 
+    }
+
+body{
+    height: max-content;
+    width: 100vw;
+}    
+
+/* HEADER EMPIEZA */
+
+header{
+    position: relative;
+    height: 50px;
+    background: darkcyan;
+    }
+header h1{
+    color: white;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+/* HEADER TERMINA 
+    SECTION ICONS EMPIEZA  */
+
+#icons{
+    width: 95vw;
+    height: 50px;
+    top: 15px;
+    left: 3px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    overflow: hidden;
+}
+#icons div{
+    height: 60px;
+    width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#icons div img{
+    height: 30px;
+    width: 30px;
+}
+#icons div label{
+    font-size: 10px;
+}
+
+       
+/*  SECTION ICONS TERMINA
+    SECTION NUESTROS PLATOS */
+
+#nuestros-platos{
+    top: 20px;
+    height: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+#nuestros-platos h1{
+    font-size: small;
+    display: block;
+    position: relative;
+    width: 95vw;
+    left: 5px;
+    top: 10px;
+    color: slategray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    } 
+#nuestros-platos .productos{
+    top: 25px;
+    height: 70px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 95vw;
+    position: relative;
+}
+#nuestros-platos .productos .foodname{
+    font-size: medium;
+    position: absolute;
+    left: 80px;
+}
+#nuestros-platos .productos .price{
+    position: absolute;
+    top: 30px;
+    left: 80px;
+    color: grey;
+    font-size: small;
+}    
+#nuestros-platos .productos .foodimage{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 5px;
+    top: 5px;
+}
+/*  SECTION NUESTROS PLATOS TERMINA
+    SECTION RECOMENDED   */
+#recomended{
+    position: relative;
+    height: 300px;
+    width: 100vw;
+    top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-items: flex-start;
+    overflow: hidden;
+}
+#recomended h1{
+    font-size: small;
+    display: block;
+    position: relative;
+    width: 95vw;
+    height: max-content;
+    left: 15px;
+    top: 10px;
+    color: slategray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#recomended .recomended{
+    position: relative;
+    height: 200px;
+    top: 50px;
+    left: -90px;
+    width: 60vw;
+}
+#recomended .recomended .recomended-image{
+    position: relative;
+    height: 200px;
+    width: 60vw;
+}
+
+
+}
