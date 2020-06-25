@@ -8,6 +8,9 @@ async function productsdivs(datos, index){
     let foodname = document.createElement("h3");
     let price = document.createElement("p");
     let image = document.createElement("img");
+    let button = document.createElement("button");
+    button.onclick = getinfo_products;
+    button.className = "nuestros-platos-button";
     creatediv.className = "productos";
     foodname.className = "foodname";
     price.className = "price";
@@ -16,6 +19,9 @@ async function productsdivs(datos, index){
     creatediv.appendChild(foodname);
     creatediv.appendChild(price);
     creatediv.appendChild(image);
+    creatediv.appendChild(button);
+    button.value = datos.datos[index].id;
+    button.innerText = "+";
     foodname.innerHTML = datos.datos[index].foodname;
     price.innerHTML = "$ "+ datos.datos[index].price;
     image.src = datos.datos[index].url;
@@ -25,7 +31,6 @@ window.onload = async function(){
     let url = 'http://127.0.0.1:3000/productos/get';
     const resp = await fetch(url);
     const datos = await resp.json();
-    console.log(resp);
     console.log(datos);
     for (let index = 0; index < datos.datos.length; index++) {
         productsdivs(datos, index);
@@ -42,6 +47,8 @@ async function recomendeddivs(data){
     let price = document.createElement("p");
     let image = document.createElement("img");
     let añadir_button = document.createElement("button");
+    let span = document.createElement("div");
+    span.className = "span";
     creatediv.className = "recomended";
     foodname.className = "recomended-foodname";
     price.className = "recomended-price";
@@ -52,6 +59,7 @@ async function recomendeddivs(data){
     creatediv.appendChild(price);
     creatediv.appendChild(image);
     creatediv.appendChild(añadir_button);
+    creatediv.appendChild(span);
     foodname.innerHTML = data.datos[0].foodname;
     price.innerHTML = "$ "+ data.datos[0].price;
     image.src = data.datos[0].url;
@@ -75,4 +83,41 @@ setTimeout(async function recomended (){
         removeitemofarray(random_number);
     };
 }, 1000);
+
+//CREACION DE RECOMENDADOS TERMINO
+
+//CREACION DE PEDIDOS
+let pedidos_data = {
+    "id": [],
+    "cantidad": []
+}
+
+async function getinfo_products(event){
+    let style = event.target.style;
+    let id = event.target.value;
+    if(style.background !== "green"){
+    style.background = "green";
+    console.log(id);
+    let url_pedidos = 'http://127.0.0.1:3000/productos/get/'+ id
+    const resp = await fetch(url_pedidos);
+    const data = await resp.json();
+    pedidos_data.id.push(data.datos[0].id);
+    console.log(pedidos_data.id);
+    }
+    else if(style.background == "green"){
+        style.background = "orange";
+        const findIndex = (element) => element == id;
+        let id_number = pedidos_data.id.findIndex(findIndex);
+        if(id_number >= 0){
+            pedidos_data.id.splice(id_number, 1);
+        }else{
+            console.log(id_number);    
+        }
+        console.log(pedidos_data.id);
+    };
+}
+
+
+
+
 

@@ -104,6 +104,18 @@ header h1{
     left: 5px;
     top: 5px;
 }
+#nuestros-platos .productos .nuestros-platos-button{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    left: 80vw;
+    top: 10px;
+    color: black;
+    background: orange;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+}
 /*  SECTION NUESTROS PLATOS TERMINA
     SECTION RECOMENDED   */
 #recomended{
@@ -111,10 +123,8 @@ header h1{
     height: 300px;
     width: 100vw;
     top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-items: flex-start;
     overflow: hidden;
+    display: inline-flex;
 }
 #recomended h1{
     font-size: small;
@@ -132,12 +142,31 @@ header h1{
     height: 200px;
     top: 50px;
     left: -90px;
-    width: 60vw;
+    width: 55vw;
+    
 }
 #recomended .recomended .recomended-image{
     position: relative;
-    height: 200px;
-    width: 60vw;
+    height: 150px;
+    width: 50vw;
+    top: -30px;
+    
+}
+#recomended .recomended .span{
+    position: relative;
+    width: 55vw;
+    height: 15px;
+    color: white;
+}
+#recomended .recomended .recomended-foodname{
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+    color: white;
+    left: 25px;
+    top: 110px;
+    width: 20vw;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 

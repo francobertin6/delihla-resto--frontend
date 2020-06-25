@@ -17,12 +17,15 @@ button_login.addEventListener("click", async function(event){
         'Content-Type': 'application/json'
     }
 })
-.then(function(res){
-    console.log(res);
+.then(async function(res){
+    let payload = await res.json();
+    console.log(payload.token);
+    localStorage.setItem("token", JSON.stringify(payload.token));
 })
 .catch(function(err){
     console.log(err);
 })
+return window.location.replace("delilah-resto-user.html")
 })
 // LOGIN
 
