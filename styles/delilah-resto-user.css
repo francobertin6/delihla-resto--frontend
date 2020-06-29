@@ -13,7 +13,7 @@ body{
 
 header{
     position: relative;
-    height: 50px;
+    height: 60px;
     background: darkcyan;
     }
 header h1{
@@ -24,6 +24,19 @@ header h1{
     left: 50%;
     transform: translate(-50%, -50%);
     }
+header img{
+    position: absolute;
+    top: 32%;
+    left: 90%;
+    height: 25px;
+    width: 25px;
+}
+header #carrito-no-activo{
+    display: block;
+}
+header #carrito-activo{
+    display: none;
+}
 
 /* HEADER TERMINA 
     SECTION ICONS EMPIEZA  */
@@ -168,6 +181,10 @@ header h1{
     width: 20vw;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-
+/*  SECTION RECOMENDED TERMINA 
+    SECTION PEDIDO  */
+    #pedidos{
+        display: none;
+    }
 
 }
