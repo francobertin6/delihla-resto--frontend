@@ -185,6 +185,126 @@ header #carrito-activo{
     SECTION PEDIDO  */
     #pedidos{
         display: none;
+        height: max-content;
+        position: relative;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #pedidos #second-half{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        top: 20px;
+        height: max-content;
+    }
+    #pedidos #second-half .forma-de-pago{
+        display: block;
+        position: relative;
+        width: 95vw;
+        left: 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        top: 20px;
+    }
+    #pedidos #second-half .direccion{
+        display: block;
+        position: relative;
+        width: 95vw;
+        left: 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        top: 20px;
+    }
+    #pedidos #second-half button{
+        margin: 5px 5px 5px 5px;
+        width: 71vw;
+        height: 50px;
+        border-radius: 25px 25px 25px 25px;
+        border: transparent;
+        background: sandybrown;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+        top: 80px;
+    }
+    #pedidos #second-half .cancelar-pedido{
+        margin: 5px 5px 5px 5px;
+        width: 71vw;
+        height: 50px;
+        border: transparent;
+        background: transparent;
+        color: orange;
+    }
+    #pedidos #first-half{
+        height: max-content;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding-bottom: 50px;
+        top: 20px;
+    }
+    #pedidos #first-half h1{
+        font-size: small;
+        display: block;
+        position: relative;
+        width: 95vw;
+        left: 5px;
+        top: 10px;
+        color: slategray;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    #pedidos #first-half div{
+        top: 25px;
+        height: 70px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 95vw;
+        position: relative
+    }
+    #pedidos #first-half h3{
+        font-size: medium;
+        position: absolute;
+        left: 80px;
+    }
+    #pedidos #first-half p{
+        position: absolute;
+        top: 30px;
+        left: 80px;
+        color: grey;
+        font-size: small;
+    }
+    #pedidos #first-half img{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        left: 5px;
+        top: 5px;
+    }
+    #pedidos #first-half #flecha-arriba{
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        left: 90%;
+        top: 40%;
+        transform: translate(-50%);
+    }
+    #pedidos #first-half #contador{
+        position: absolute;
+        font-size: 25px;
+        left: 85%;
+        top: 38%;
+        transform: translate(-50%);
+        color: black;
+    }
+    #pedidos #first-half #flecha-abajo{
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        left: 80%;
+        top: 40%;
+        transform: translate(-50%);
     }
 
 }

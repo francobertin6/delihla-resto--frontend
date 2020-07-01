@@ -133,7 +133,8 @@ let recomendados = document.getElementById("recomended");
 let nuestros_platos = document.getElementById("nuestros-platos");
 let pedidos = document.getElementById("pedidos");
 
-carrito_activa.addEventListener("click", async function(){
+carrito_activa.addEventListener("click", async function(event){
+    event.preventDefault();
     icons.style.display = "none";
     recomendados.style.display = "none";
     nuestros_platos.style.display = "none";
@@ -159,14 +160,50 @@ function createpedidosxproductos_section(data, detalle_pedido){
     let foodname = document.createElement("h3");
     let price = document.createElement("p");
     let image = document.createElement("img");
+    let arriba = document.createElement("img");
+    let abajo = document.createElement("img");
+    let contador = document.createElement("p");
+    contador.id = "contador";
+    contador.innerHTML = "1";
+    arriba.id = "flecha-arriba";
+    abajo.id = "flecha-abajo";
+    arriba.src = "./images/icons/proximo.svg";
+    abajo.src = "./images/icons/regreso.svg";
     detalle_pedido.appendChild(div_producto);
     div_producto.appendChild(foodname);
     div_producto.appendChild(price);
     div_producto.appendChild(image);
+    div_producto.appendChild(arriba);
+    div_producto.appendChild(abajo);
+    div_producto.appendChild(contador);
     foodname.innerHTML = data.datos[0].foodname;
     price.innerHTML = data.datos[0].price;
     image.src = data.datos[0].url;
+    arriba.addEventListener("click", function(event){
+        if(contador.innerHTML == 10){
+            console.log("no se puede aumentar");
+        }else{
+            event.preventDefault();
+            let number = parseInt(contador.innerHTML);
+            console.log(number);
+            let newnumber = number += 1;
+            contador.innerHTML = newnumber; 
+        }
+    });
+    abajo.addEventListener("click", function(event){
+        if(contador.innerHTML == 1){
+            console.log("no se puede disminuir")
+        }else{
+            event.preventDefault();
+            let number = parseInt(contador.innerHTML);
+            console.log(number);
+            let newnumber = number -= 1;
+            contador.innerHTML = newnumber;
+        }
+    })
 }
+
+
 
 
 
