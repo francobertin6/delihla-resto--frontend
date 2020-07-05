@@ -227,7 +227,7 @@ header #carrito-activo{
         transform: translate(-50%);
         top: 80px;
     }
-    #pedidos #second-half .cancelar-pedido{
+    #pedidos #second-half #cancelar-pedido{
         margin: 5px 5px 5px 5px;
         width: 71vw;
         height: 50px;
@@ -282,7 +282,7 @@ header #carrito-activo{
         left: 5px;
         top: 5px;
     }
-    #pedidos #first-half #flecha-arriba{
+    #pedidos #first-half .flecha-arriba{
         position: absolute;
         width: 25px;
         height: 25px;
@@ -290,7 +290,7 @@ header #carrito-activo{
         top: 40%;
         transform: translate(-50%);
     }
-    #pedidos #first-half #contador{
+    #pedidos #first-half .contador{
         position: absolute;
         font-size: 25px;
         left: 85%;
@@ -298,7 +298,7 @@ header #carrito-activo{
         transform: translate(-50%);
         color: black;
     }
-    #pedidos #first-half #flecha-abajo{
+    #pedidos #first-half .flecha-abajo{
         position: absolute;
         width: 25px;
         height: 25px;
@@ -306,5 +306,39 @@ header #carrito-activo{
         top: 40%;
         transform: translate(-50%);
     }
-
+/*  SECTION PEDIDO TERMINA 
+    SECTION AGRADECIMIENTO */
+    #pizza-section img{
+        width: 80vw;
+        height: 80vw;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    #pizza-section h1{
+        position: relative;
+        width: 100vw;
+        text-align: center;
+        top: -180px;
+    }
+    #pizza-section p{
+        position: relative;
+        width: 200px;
+        height: 100px;
+        top: -20px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    #pizza-section #comeback{
+        position: relative;
+        background: orange;
+        border-radius: 25px 25px 25px 25px;
+        width: 60vw;
+        height: 30px;
+        top: -50px;
+        color: black;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    /* SECTION AGRADECIMIENTO TERMINADO */
 }

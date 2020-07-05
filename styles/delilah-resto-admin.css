@@ -1,0 +1,52 @@
+@media screen and (min-width: 300px) and (max-width: 720px){
+*{
+    margin: 0;
+    padding: 0; 
+    }
+    
+body{
+    height: max-content;
+    width: 100vw;
+}    
+    
+/* HEADER EMPIEZA */
+    
+header{
+    position: relative;
+    height: 15vw;
+    background: darkcyan;
+}
+header h1{
+    color: white;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translate(0%, -50%);
+    font-size: 4vw;
+}
+header .navegador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: white;
+    position: relative;
+    top: 50%;
+    left: 40vw;
+    width: 60vw;
+    transform: translate(0%, -50%);
+}
+header .navegador a{
+    font-size: 3vw;
+    color: white;
+    text-decoration: unset;
+}
+header .navegador button{
+    background: white;
+    color: orange;
+    border-radius: 25px 25px 25px 25px;
+    width: 25vw;
+    border: transparent;
+    font-size:2.8vw;
+}
+}
