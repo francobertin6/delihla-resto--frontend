@@ -2,6 +2,7 @@
 let button_login = document.getElementById("login");
 let button_register = document.getElementById("register-button");
 
+
 button_login.addEventListener("click", async function(event){
     event.preventDefault();
     let data = {
@@ -19,13 +20,18 @@ button_login.addEventListener("click", async function(event){
 })
 .then(async function(res){
     let payload = await res.json();
-    console.log(payload.token);
-    localStorage.setItem("token", JSON.stringify(payload.token));
+    console.log(payload);
+    localStorage.setItem("token", payload.token);
+    if(payload.usuario == "usuario"){
+        setTimeout(window.location.assign("delilah-resto-user.html"), 5000);
+    }else if(payload.usuario == "admin"){
+        setTimeout(window.location.assign("delilah-resto-admin.html"), 5000);
+    }
 })
 .catch(function(err){
     console.log(err);
 })
-return window.location.replace("delilah-resto-user.html")
+ 
 })
 // LOGIN
 
@@ -76,4 +82,9 @@ registro.addEventListener("click", async function(e){
         console.log(err);
     })
 })
+
+window.onload = function(){
+    localStorage.clear();
+}
+
 

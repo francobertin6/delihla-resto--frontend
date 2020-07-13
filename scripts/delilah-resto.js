@@ -1,3 +1,4 @@
+
 // ARRAYS
 const products_id = [];
 
@@ -163,10 +164,10 @@ function createpedidosxproductos_section(data, detalle_pedido){
     let arriba = document.createElement("img");
     let abajo = document.createElement("img");
     let contador = document.createElement("p");
-    contador.id = "contador";
+    contador.className = "contador";
     contador.innerHTML = "1";
-    arriba.id = "flecha-arriba";
-    abajo.id = "flecha-abajo";
+    arriba.className = "flecha-arriba";
+    abajo.className = "flecha-abajo";
     arriba.src = "./images/icons/proximo.svg";
     abajo.src = "./images/icons/regreso.svg";
     detalle_pedido.appendChild(div_producto);
@@ -203,8 +204,78 @@ function createpedidosxproductos_section(data, detalle_pedido){
     })
 }
 
+let confirmar_pedido = document.getElementById("confirmar-pedido");
+let cancelar_pedido = document.getElementById("cancelar-pedido");
 
 
+
+confirmar_pedido.addEventListener("click", function(event){
+    let contador = document.querySelectorAll(".contador");
+    console.log(contador);
+    event.preventDefault();
+    contador.forEach(element => {
+        let values = parseInt(element.innerHTML);
+        console.log(values);
+        pedidos_data.cantidad.push(values);
+    })
+    console.log(pedidos_data);
+    let token = localStorage.getItem("token");
+    console.log(token);
+    fetch('http://127.0.0.1:3000/pedidos/pedidos',{
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token,
+        },
+        body: JSON.stringify(pedidos_data)
+    })
+    .then(async function(res){
+        console.log(res);
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+    pedidos.style.display = "none";
+    imagepizzacreated();
+});
+
+cancelar_pedido.addEventListener("click", function(event){
+    event.preventDefault();
+    setTimeout(window.location.replace("delilah-resto-user.html"), 3000);
+});
+
+// creacion del mensaje de pedido creado
+
+let body = document.getElementById("body");
+
+function imagepizzacreated(){
+    let section_pizza = document.createElement("section");
+    let pizza = document.createElement("img");
+    let paragraph = document.createElement("p");
+    let botton = document.createElement("button");
+    let h1 = document.createElement("h1");
+    h1.innerHTML = "Recibimos tu pedido";
+    pizza.src = "./images/53798bcd7054e4feaef568a5cf49574b-etiqueta-de-pizza-by-vexels.png";
+    paragraph.innerHTML = "gracias por pedir en Delilah, tu pedido fue registrado con exito";
+    botton.innerHTML = "volver a la pagina principal";
+    botton.id = "comeback";
+    section_pizza.id = "pizza-section";
+    section_pizza.appendChild(pizza);
+    section_pizza.appendChild(paragraph);
+    section_pizza.appendChild(botton);
+    section_pizza.appendChild(h1);
+    body.appendChild(section_pizza);
+    botton.onclick = backtothelandingpage;
+}
+// creacion del mensaje de pedido creado finalizado // 
+
+function backtothelandingpage(event, callback){
+    event.preventDefault();
+    window.location.assign("delilah-resto-user.html");
+    callback = setTimeout(function(){
+        console.log("crear en el futuro los pedidos del usuario en esta funcion")
+    }, 3000)
+ }  //ultima funcion no anda 
 
 
 
