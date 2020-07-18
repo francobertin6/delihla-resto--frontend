@@ -1,0 +1,108 @@
+@media screen and (min-width: 300px) and (max-width: 720px){
+
+*{
+  margin: 0;
+  padding: 0; 
+  height: max-content;
+}
+/* HEADER EMPIEZA */
+header{
+  position: relative;
+  height: 150px;
+  background: darkcyan;
+}
+header h1{
+  color: white;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+/* HEADER TERMINA
+
+ EMPIEZA EL SECTION LOGIN */
+#loguear{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  justify-content: space-around;
+}
+#loguear .username{
+  height: max-content;
+  width: max-content;
+  margin: 5px 5px 5px 5px;
+}
+#loguear .username input{
+  height: 50px;
+  width: 70vw;
+  border-radius: 10px 10px 10px 10px;
+}
+#loguear .password{
+  height: max-content;
+  width: max-content;
+  margin: 5px 5px 5px 5px;
+}
+#loguear .password input{
+  height: 50px;
+  width: 70vw;
+  margin: 0;
+  border-radius: 10px 10px 10px 10px;
+}
+#loguear .login-register #login{
+  margin: 5px 5px 5px 5px;
+  width: 71vw;
+  height: 50px;
+  border-radius: 25px 25px 25px 25px;
+  border: transparent;
+  background: sandybrown;
+}
+#loguear .login-register #register-button{
+  margin: 5px 5px 5px 5px;
+  width: 71vw;
+  height: 50px;
+  border: transparent;
+  background: transparent;
+  color: orange;
+}
+/* TERMINA EL SECTION LOGIN 
+   EMPIEZA CON EL SECTION REGISTER */
+#register{
+  position: relative;
+  height: 650px;
+  top: 10px;
+  display: none;
+}
+#register form{
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+#register div input{
+  height: 30px;
+  width: 70vw;
+  border-radius: 10px 10px 10px 10px;
+  margin-top: 10px;
+}
+#register .register-login #registro{
+  margin: 5px 5px 5px 5px;
+  width: 71vw;
+  height: 50px;
+  border-radius: 25px 25px 25px 25px;
+  border: transparent;
+  background: sandybrown;
+}
+#register .register-login #iniciar-sesion{
+  margin: 5px 5px 5px 5px;
+  width: 71vw;
+  height: 50px;
+  border: transparent;
+  background: transparent;
+  color: orange;
+}
+/* TERMINA CON EL SECTION REGISTER */
+}

@@ -1,0 +1,205 @@
+@media screen and (min-width: 300px) and (max-width: 720px){
+*{
+    margin: 0;
+    padding: 0; 
+    }
+    
+body{
+    height: max-content;
+    width: 100vw;
+}    
+    
+/* HEADER EMPIEZA */
+    
+header{
+    position: relative;
+    height: 15vw;
+    background: darkcyan;
+}
+header h1{
+    color: white;
+    text-align: left;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translate(0%, -50%);
+    font-size: 4vw;
+}
+header .navegador{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: white;
+    position: relative;
+    top: 50%;
+    left: 40vw;
+    width: 60vw;
+    transform: translate(0%, -50%);
+}
+header .navegador a{
+    font-size: 3vw;
+    color: white;
+    text-decoration: unset;
+}
+header .navegador button{
+    background: white;
+    color: orange;
+    border-radius: 25px 25px 25px 25px;
+    width: 25vw;
+    border: transparent;
+    font-size:2.8vw;
+}
+/*  HEADER TERMINA 
+    SECTION CONTAINER-PEDIDOS */
+#container-pedidos{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#container-pedidos #info{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    position: relative;
+    top: 10px;
+}
+#container-pedidos #info p{
+    font-size: 4vw;
+}
+/* estado */
+#container-pedidos #info #container-estado{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#container-pedidos #info #container-estado .estado{
+    width: 12vw;
+    height: 8vw;
+    font-size: 3vw;
+    margin-top: 2vw;
+    border-radius: 10px 10px 10px 10px;
+}
+    /* estado */
+/* hora */
+#container-pedidos #info #container-hora{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#container-pedidos #info #container-hora .hora{
+    font-size: 3.5vw;
+    margin-top: 4vw;
+    margin-bottom: 2.8vw;
+}
+    /* hora */
+/* descripcion */
+#container-pedidos #info #container-descripcion{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 20vw;
+}
+#container-pedidos #info #container-descripcion .descripcion_p{
+    font-size: 3vw;
+    text-align: center;
+    margin-top: 4vw;
+    margin-bottom: 1vw;
+    
+}
+    /* descripcion */
+/* pago */
+#container-pedidos #info #container-pago{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 12vw;
+}
+#container-pedidos #info #container-pago .pago{
+    margin-top: 4vw;
+    margin-bottom: 2vw;
+}
+    /* pago */
+/* usuario */
+#container-pedidos #info #container-usuario{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 20vw;
+}
+#container-pedidos #info #container-usuario .usuario_p{
+    font-size: 3.5vw;
+    text-align: center;
+    margin-top: 4vw;
+    margin-bottom: 2.8vw;
+}
+    /* usuario */
+/* direccion */
+#container-pedidos #info #container-direccion{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#container-pedidos #info #container-direccion .direccion_p{
+    display: none;
+}
+#container-pedidos #info #container-direccion .direccion{
+    width: 8vw;
+    height: 5vw;
+    margin-top: 4vw;
+    margin-bottom: 1vw;
+}
+    /* direccion */
+
+    /* estados cambiables */
+#container-pedidos #estados-container{
+    display: flex;
+    z-index: 2;
+    width: 25vw;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: fit-content;
+    position: absolute;
+    border: medium black solid;
+    left: 12vw;
+}
+#container-pedidos #estados-container .estados{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4vw;
+    color: white;
+    height: 10vw;
+}
+/* SECTION ADMINISTRADOR */
+
+#administracion-section{
+    position: relative;
+    display: block;
+    flex-direction: column;
+}
+#administracion-section .contenedor{
+    position: relative;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+}
+#administracion-section .contenedor div{
+    width: 100vw;
+    height: 40vw;
+    text-align: center;
+}
+}
