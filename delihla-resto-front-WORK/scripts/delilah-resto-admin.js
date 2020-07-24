@@ -1,6 +1,9 @@
 const token = localStorage.getItem("token")
 const body = document.getElementById("body");
 
+// ARRAY QUE CONTIENE DATOS DE PEDIDOS
+let array_datos_pedidos = [];
+
 window.onload = async function(){
     // GET PEDIDOS
     let url = "http://127.0.0.1:3000/pedidos/get-pedidos";
@@ -13,6 +16,7 @@ window.onload = async function(){
     .then(async function(res){
         let payload = await res.json();
         console.log(payload);
+        array_datos_pedidos.push(payload);
         for (let index = 0; index < payload.datos.length; index++) {
             armarpedidostable(index, payload);
         }
@@ -144,7 +148,7 @@ const estado_elements = [];
 
 function pedidos_put(event){
     let estados_container = document.getElementById("estados-container");
-    estados_container.style.display = "none";  // en esta linea tiene que borrarse estados-container (estados_div_container)
+    estados_container.remove(); 
     let element_estado = estado_elements[0];
     console.log(element_estado.value);
     let event_text = event.target.innerHTML;
@@ -162,6 +166,7 @@ function pedidos_put(event){
             'Authorization': token
         }
     })
+    window.location.assign("delilah-resto-admin.html");
 }
 
 // ADMINISTRACION EN ADMIN
@@ -300,4 +305,101 @@ create_admins.addEventListener("click", function(){
     button_send.innerHTML = "Crear administrador";
     button_send.id = "send-admin-info";
     section_crear_admin.appendChild(button_send);
+})
+
+    // CREAR ADMINISTRADOR NUEVO
+
+// BORRAR PEDIDOS
+let delete_pedidos = document.getElementById("borrar-pedidos");
+
+delete_pedidos.addEventListener("click", function(){
+    console.log(array_datos_pedidos[0].datos);
+    administracion_section.style.display = "none";
+    let section_borrar_pedidos = document.createElement("section");
+    section_borrar_pedidos.id = "borrar-pedidos-container";
+    section_borrar_pedidos.style.display = "flex";
+    body.appendChild(section_borrar_pedidos);
+     // BACK-BUTTON
+     let back = document.createElement("input");
+     back.addEventListener("click", function(){
+         if(section_borrar_pedidos.style.display == "flex"){
+             section_borrar_pedidos.remove();
+             administracion_section.style.display = "flex";
+         }
+     })
+     back.type = "image";
+     back.src = "./images/icons/espalda.svg";
+     section_borrar_pedidos.appendChild(back);
+     back.className = "back-button-create-admin";
+     // TITULO CREAR ADMINISTRADOR
+     let h1 = document.createElement("h1");
+     h1.innerHTML = "Borrar pedidos"
+     section_borrar_pedidos.appendChild(h1);
+    //  CREAR INFO_CONTAINER
+    let info_container = document.createElement("div");
+    info_container.id = "info_container";
+    section_borrar_pedidos.appendChild(info_container);
+    //  ESTADO
+    let estado_container = document.createElement("div");
+    estado_container.className = "estado_container";
+    info_container.appendChild(estado_container);
+    let h2_estado = document.createElement("h2");
+    estado_container.appendChild(h2_estado);
+    h2_estado.innerHTML = "Estado";
+    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+        let estado = document.createElement("h3");
+        estado.className = "estado";
+        estado_container.appendChild(estado);
+        estado.innerHTML = array_datos_pedidos[0].datos[index].estado;
+    }
+    // NUMERO DE PEDIDO
+    let numero_pedido_container = document.createElement("div");
+    numero_pedido_container.className = "numero_pedido";
+    info_container.appendChild(numero_pedido_container);
+    let h2_pedido = document.createElement("h2");
+    numero_pedido_container.appendChild(h2_pedido)
+    h2_pedido.innerHTML = "numero";
+    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+        let pedido = document.createElement("p");
+        numero_pedido_container.appendChild(pedido);
+        pedido.className = "numero-pedidos";
+        pedido.innerHTML = "#" + array_datos_pedidos[0].datos[index].id_pedido;
+        
+    }
+    // HORA
+    let hora_container = document.createElement("div");
+    hora_container.className = "hora_container";
+    info_container.appendChild(hora_container);
+    let h2_hora = document.createElement("h2");
+    hora_container.appendChild(h2_hora);
+    h2_hora.innerHTML = "Hora";
+    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+        let hora = document.createElement("p");
+        hora_container.appendChild(hora);
+        hora.className = "hora";
+        hora.innerHTML = array_datos_pedidos[0].datos[index].hora;
+    }
+    // USUARIO
+    let usuario_container = document.createElement("div");
+    info_container.appendChild(usuario_container);
+    usuario_container.className = "usuario_container";
+    let h2_usuario = document.createElement("h2");
+    usuario_container.appendChild(h2_usuario);
+    h2_usuario.innerHTML = "Usuario";
+    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+        let usuario_p = document.createElement("p");
+        usuario_p.className = "usuario_p"
+        usuario_container.appendChild(usuario_p);
+        usuario_p.innerHTML = array_datos_pedidos[0].datos[index].user_fullname;        
+    }
+    // BOTON DELETE
+    let boton_container = document.createElement("div");
+    info_container.appendChild(boton_container);
+    boton_container.className = "boton_container";
+    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+        let boton_delete = document.createElement("button");
+        boton_container.appendChild(boton_delete);
+        boton_delete.innerHTML = "X";
+        boton_delete.value = array_datos_pedidos[0].datos[index].id_pedido;
+    }
 })
