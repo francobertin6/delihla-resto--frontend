@@ -63,6 +63,41 @@
         </div>
     </section>
 
+    <section id="cargar-productos-container" style="display: none;">
+        <form action="">
+            <div>
+                <label for="foodname">Nombre del plato</label>
+                <input type="text" name="foodname" placeholder="Ingrese texto">
+            </div> <br>
+            <div>
+                <label for="price">Precio</label>
+                <input type="number" name="price" placeholder="Introduzca precio">
+            </div> <br>
+            <div>
+                <label for="url">URL/Imagen</label>
+                <input type="text" name="url" placeholder="Introduzca una url">
+            </div> <br>
+            <div>
+                <label for="list">Categoria</label>
+                <select name="list" id="list">
+                    <option value="carne">Carnes</option>
+                    <option value="hamburguesa">Hamburguesas</option>
+                    <option value="ensalada">Ensaladas</option>
+                    <option value="tarta">Tartas</option>
+                    <option value="cafe">Cafe</option>
+                    <option value="postre">Postres</option>
+                    <option value="pizzas">Pizzas</option>
+                    <option value="bebidas">Bebidas</option>
+                    <option value="pastas">Pastas</option>
+                    <option value="sushi">Sushi</option>
+                </select>
+            </div> <br>
+            <div>
+                <button id="cargar-productos-submit-button">Crear producto</button>
+            </div>
+        </form>
+    </section>
+
 
 <script src="./scripts/delilah-resto-admin.js"></script>
 </body>

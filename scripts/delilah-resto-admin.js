@@ -169,25 +169,38 @@ function pedidos_put(event){
     window.location.assign("delilah-resto-admin.html");
 }
 
-// ADMINISTRACION EN ADMIN
+// HEADER NAVEGADOR BOTONES
 
 let administracion = document.getElementById("administracion");
 let administracion_section = document.getElementById("administracion-section");
 let pedidos = document.getElementById("pedidos");
+let cargar_productos_container = document.getElementById("cargar-productos-container");
+let cargar_productos = document.getElementById("cargar-producto");
+
 
 administracion.addEventListener("click", function(){
     if(administracion_section.style.display == "none"){
         container_pedidos.style.display = "none";
+        cargar_productos_container.style.display = "none";
         administracion_section.style.display = "flex";
     }
 })
 
 pedidos.addEventListener("click", function(){
-    if(administracion_section.style.display == "flex"){
+    if(container_pedidos.style.display == "none"){
         container_pedidos.style.display = "flex";
         administracion_section.style.display = "none"
+        cargar_productos_container.style.display = "none"; 
     }
 })
+
+ cargar_productos.addEventListener("click", function(){
+    if(cargar_productos_container.style.display == "none"){
+        cargar_productos_container.style.display = "flex";
+        administracion_section.style.display = "none";
+        container_pedidos.style.display = "none";
+     }
+     })
 
 // ADMINISTRACION BORRAR PRODUCTOS
 
@@ -403,3 +416,84 @@ delete_pedidos.addEventListener("click", function(){
         boton_delete.value = array_datos_pedidos[0].datos[index].id_pedido;
     }
 })
+    // BORRAR PEDIDOS
+
+// MODIFICAR PRODUCTOS
+
+let modificar_productos = document.getElementById("modificar-productos");
+
+modificar_productos.addEventListener("click", function(){
+    administracion_section.style.display = "none";
+    // DIV-HEADER
+    let div_header = document.createElement("div");
+    div_header.style.display = "flex";
+    div_header.id = "header-modificar";
+    body.appendChild(div_header);
+    // BOTON BACK
+    let back = document.createElement("input");
+    back.addEventListener("click", function(){
+        if(div_header.style.display == "flex" && section_modificar.style.display == "flex"){
+            div_header.remove();
+            section_modificar.remove();
+            administracion_section.style.display = "flex";
+        }
+    });
+    back.type = "image";
+    back.src = "./images/icons/espalda.svg";
+    div_header.appendChild(back);
+    back.className = "back-button-modificar-productos";
+    // TITULO MODIFICAR PRODUCTOS
+    let h1 = document.createElement("h1");
+    h1.innerHTML = "Modificar productos";
+    div_header.appendChild(h1);
+    // SECTION CONTENEDOR-PRODUCTOS
+    let section_modificar = document.createElement("section");
+    section_modificar.id = "info-productos";
+    section_modificar.style.display = "flex";
+    body.appendChild(section_modificar);
+    // FUNCION TRAER PRODUCTOS
+    modificar_get(section_modificar);
+});    
+
+function traerproductosparamodificar(section_modificar, datos, index){
+    let creatediv = document.createElement("div");
+    let foodname = document.createElement("input");
+    let price = document.createElement("input");
+    let url = document.createElement("input");
+    let categoria = document.createElement("input");
+    let button = document.createElement("button");
+    creatediv.className = "productos";
+    foodname.className = "foodname";
+    price.className = "price";
+    url.className = "url";
+    categoria.className = "categoria";
+    button.className = "modificar";
+    foodname.value = datos.datos[index].foodname;
+    price.value = datos.datos[index].price;
+    url.value = datos.datos[index].url;
+    categoria.value = datos.datos[index].categoria;
+    section_modificar.appendChild(creatediv);
+    creatediv.appendChild(foodname);
+    creatediv.appendChild(price);
+    creatediv.appendChild(url);
+    creatediv.appendChild(categoria);
+    creatediv.appendChild(button);
+    button.value = datos.datos[index].id;
+    button.innerText = "Modificar";
+}
+
+async function modificar_get(section_modificar){
+        let url = 'http://127.0.0.1:3000/productos/get';
+        const resp = await fetch(url);
+        const datos = await resp.json();
+        console.log(datos);
+    for (let index = 0; index < datos.datos.length; index++) {
+        traerproductosparamodificar(section_modificar,datos,index);
+    };
+}
+
+// CARGAR PRODUCTOS
+
+
+
+

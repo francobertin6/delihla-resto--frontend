@@ -88,6 +88,7 @@ header .navegador button{
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: rgb(160, 156, 156);
 }
 #container-pedidos #info #container-hora .hora{
     font-size: 3.5vw;
@@ -120,6 +121,7 @@ header .navegador button{
     align-items: center;
     flex-wrap: wrap;
     width: 12vw;
+    background: rgb(160, 156, 156);
 }
 #container-pedidos #info #container-pago .pago{
     margin-top: 4vw;
@@ -149,6 +151,7 @@ header .navegador button{
     flex-direction: column;
     align-items: center;
     flex-wrap: wrap;
+    background: rgb(160, 156, 156);
 }
 #container-pedidos #info #container-direccion .direccion_p{
     display: none;
@@ -407,6 +410,86 @@ header .navegador button{
     margin-top: 1.5vw;
     margin-bottom: 1.5vw;
 }
-
+/* MODIFICAR PRODUCTOS */
+#header-modificar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+}
+#header-modificar .back-button-modificar-productos{
+    display: block;
+    position: relative;
+    width: 6vw;
+    height: 6vw;
+    left: 2.5vw;
+}
+#header-modificar h1{
+    font-size: 3vw;
+    display: block;
+    position: relative;
+    width: max-content;
+    left: 62vw;
+    top: 10px;
+    height: max-content;
+    color: slategray;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#info-productos{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#info-productos .productos{
+    top: 25px;
+    height: 250px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100vw;
+    position: relative;
+    border-bottom: 2px solid black;
+}
+#info-productos .productos .foodname{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 5%;
+    width: 80vw;
+}
+#info-productos .productos .price{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 80vw;
+    color: grey;
+    font-size: small;
+}
+#info-productos .productos .url{
+    position: absolute;
+    width: 80vw;
+    left: 50%;
+    transform: translate(-50%);
+    top: 45%;
+}
+#info-productos .productos .categoria{
+    position: absolute;
+    width: 80vw;
+    left: 50%;
+    transform: translate(-50%);
+    top: 65%;
+}
+#info-productos .productos .modificar{
+    position: absolute;
+    width: 80vw;
+    height: 25px;
+    left: 50%;
+    transform: translate(-50%);
+    top: 80%;
+    color: black;
+    background: orange;
+    border: none;
+    font-size: 15px;
+}
 
 }
