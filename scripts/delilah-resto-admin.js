@@ -318,7 +318,25 @@ create_admins.addEventListener("click", function(){
     button_send.innerHTML = "Crear administrador";
     button_send.id = "send-admin-info";
     section_crear_admin.appendChild(button_send);
+    button_send.onclick = new_admins_function;
 })
+
+function new_admins_function(event){
+    event.preventDefault();
+    let body = {
+        "username": document.getElementById("admin").value,
+        "password": document.getElementById("contra").value,
+    }
+    console.log(body);
+    fetch("http://127.0.0.1:3000/admin/crearadmin",{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body),
+    });
+}
 
     // CREAR ADMINISTRADOR NUEVO
 
@@ -414,11 +432,29 @@ delete_pedidos.addEventListener("click", function(){
         boton_container.appendChild(boton_delete);
         boton_delete.innerHTML = "X";
         boton_delete.value = array_datos_pedidos[0].datos[index].id_pedido;
+        boton_delete.onclick = borrar_pedidos;
     }
 })
+function borrar_pedidos(event){
+    console.log(event.target);
+    event.preventDefault();
+    let value = event.target.value;
+    fetch("http://127.0.0.1:3000/pedidos/delete?id=" + value,{
+        method: "DELETE",  
+        headers:{
+            'Authorization': token
+        }
+    })
+}
+
     // BORRAR PEDIDOS
 
 // MODIFICAR PRODUCTOS
+
+// arrays
+let array_categorias = ["carne", "hamburguesa", "ensalada", "tarta", "cafe", "postre", "pizzas", "bebidas", "pastas", "sushi"];
+let arrays_divs_productos = [];
+// arrays
 
 let modificar_productos = document.getElementById("modificar-productos");
 
@@ -460,7 +496,14 @@ function traerproductosparamodificar(section_modificar, datos, index){
     let foodname = document.createElement("input");
     let price = document.createElement("input");
     let url = document.createElement("input");
-    let categoria = document.createElement("input");
+    let categoria = document.createElement("select");
+    for (let index = 0; index < array_categorias.length; index++) {
+        const element = array_categorias[index];
+        let option = document.createElement("option");
+        option.value = element;
+        option.text = element
+        categoria.options.add(option);
+    };
     let button = document.createElement("button");
     creatediv.className = "productos";
     foodname.className = "foodname";
@@ -472,6 +515,8 @@ function traerproductosparamodificar(section_modificar, datos, index){
     price.value = datos.datos[index].price;
     url.value = datos.datos[index].url;
     categoria.value = datos.datos[index].categoria;
+    categoria.text = datos.datos[index].categoria;
+    creatediv.id = datos.datos[index].id;
     section_modificar.appendChild(creatediv);
     creatediv.appendChild(foodname);
     creatediv.appendChild(price);
@@ -492,8 +537,54 @@ async function modificar_get(section_modificar){
     };
 }
 
+let button_modificar_productos = document.getElementsByClassName("modificar");
+
+// funcion para lograr modificar, aun no resuelta
+function modificar_put(foodname, price, url, categoria){
+    let value = event.target.value;
+    let arrays_query = [foodname, price, url, categoria];
+    for (let index = 0; index < arrays_query.length; index++) {
+        const element_classname = arrays_query[index].className;
+        const element_value = arrays_query[index].value
+        console.log(element_classname);
+        console.log(element_value);
+        fetch("http://127.0.0.1:3000/productos/put/"+ value + "?" + element_classname + "=" + element_value,{
+            method: "PUT",
+            headers:{
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+        })
+    }
+}
+    // MODIFICAR PRODUCTOS
+
 // CARGAR PRODUCTOS
 
+let button_cargar_productos = document.getElementById("cargar-productos-submit-button");
 
-
+button_cargar_productos.addEventListener("click", function(event){
+    event.preventDefault();
+    let foodname = document.getElementById("foodname").value;
+    let price = document.getElementById("price").value;
+    let url = document.getElementById("url").value;
+    let categoria = document.getElementById("list").value;
+    let body_send = {
+        "foodname": foodname,
+        "price": price,
+        "url": url,
+        "categoria": categoria
+    }
+    console.log(body_send);
+    fetch("http://127.0.0.1:3000/productos/post",{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body_send)
+    }
+    )
+});
+    // CARGAR PRODUCTOS
 

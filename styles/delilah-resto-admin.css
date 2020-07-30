@@ -491,5 +491,57 @@ header .navegador button{
     border: none;
     font-size: 15px;
 }
+    /* BORRAR-PEDIDOS-CONTAINER */
+
+/* CARGAR PRODUCTOS */
+#cargar-productos-container{
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    align-items: center;
+}
+#cargar-productos-container h1{
+    position: relative;
+    height: 50px;
+    width: 100vw;
+    text-align: center;
+    top: 100px;
+    font-size: 7vw;
+}
+#cargar-productos-container #formulario-cargar-productos{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    top: 125px;
+    height: fit-content;
+}
+#cargar-productos-container #formulario-cargar-productos div{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    text-align: center;
+    position: relative;
+}
+#cargar-productos-container #formulario-cargar-productos div input{
+    margin: 5px 5px 5px 5px;
+    width: 80vw;
+    height: 50px;
+    border-radius: 25px 25px 25px 25px;
+    border: 1px solid black;
+}
+#cargar-productos-container #formulario-cargar-productos div select{
+    width: 80vw;
+    height: 25px;
+    margin: 5px 5px 5px 5px;
+}
+#cargar-productos-container #formulario-cargar-productos div button{
+    width: 80vw;
+    height: 50px;
+    background: rgb(126, 209, 43);
+    margin-top: 40px;
+}
 
 }
