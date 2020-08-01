@@ -525,6 +525,7 @@ function traerproductosparamodificar(section_modificar, datos, index){
     creatediv.appendChild(button);
     button.value = datos.datos[index].id;
     button.innerText = "Modificar";
+    button.onclick = modificar_put;
 }
 
 async function modificar_get(section_modificar){
@@ -539,19 +540,16 @@ async function modificar_get(section_modificar){
 
 let button_modificar_productos = document.getElementsByClassName("modificar");
 
-// funcion para lograr modificar, aun no resuelta
-function modificar_put(foodname, price, url, categoria){
+
+function modificar_put(){
     let value = event.target.value;
-    let arrays_query = [foodname, price, url, categoria];
-    for (let index = 0; index < arrays_query.length; index++) {
-        const element_classname = arrays_query[index].className;
-        const element_value = arrays_query[index].value
-        console.log(element_classname);
-        console.log(element_value);
+    let div_contenedor_info = document.getElementById(value).children;
+    for (let index = 0; index < 4; index++) {
+        let element_classname = div_contenedor_info[index].className;
+        let element_value = div_contenedor_info[index].value;
         fetch("http://127.0.0.1:3000/productos/put/"+ value + "?" + element_classname + "=" + element_value,{
             method: "PUT",
             headers:{
-                'Content-Type': 'application/json',
                 'Authorization': token
             },
         })
