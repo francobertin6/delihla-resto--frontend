@@ -233,7 +233,35 @@ borrar_productos.addEventListener("click", function(){
         // titulo h1
     // FUNCION GET 
     get(borrar_productos_container)
-})
+
+    // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+    pedidos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+    
+});
 
 function traer_productos_for_delete(borrar_productos_container, datos, index){
     let creatediv = document.createElement("div");
@@ -272,17 +300,24 @@ async function get (borrar_productos_container){
 function delete_products(){
     let value = event.target.value;
     let borrar_productos_container = document.getElementById("borrar-productos-container");
+    borrar_productos_container.style.filter = "blur(5px)";
     // crear advertencia
     let contenedor_advertencia = document.createElement("div");
-    borrar_productos_container.appendChild(contenedor_advertencia);
+    contenedor_advertencia.id = "advertencia";
+    body.appendChild(contenedor_advertencia);
+    let div = document.createElement("div");
+    div.innerHTML = "Borrar productos";
+    contenedor_advertencia.appendChild(div);
     let p = document.createElement("p");
     p.innerHTML = "¿Estas seguro de querer eliminar el producto seleccionado?";
     contenedor_advertencia.appendChild(p);
     let button_yes = document.createElement("button");
     button_yes.innerHTML = "SI";
+    button_yes.style.background = "#51c286";
     contenedor_advertencia.appendChild(button_yes);
     let button_no = document.createElement("button");
     button_no.innerHTML = "NO";
+    button_no.style.background = "red";
     contenedor_advertencia.appendChild(button_no);
     //  crear advertencia finalizado
     button_yes.addEventListener("click", function(){
@@ -294,9 +329,11 @@ function delete_products(){
         }
     })
     contenedor_advertencia.remove();
+    borrar_productos_container.style.filter = "blur(0px)";
 });
     button_no.addEventListener("click", function(){
         contenedor_advertencia.remove();
+        borrar_productos_container.style.filter = "blur(0px)";
     });
 };
 
@@ -352,6 +389,33 @@ create_admins.addEventListener("click", function(){
     button_send.id = "send-admin-info";
     section_crear_admin.appendChild(button_send);
     button_send.onclick = new_admins_function;
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+        }
+    });
 })
 
 function new_admins_function(event){
@@ -467,7 +531,35 @@ delete_pedidos.addEventListener("click", function(){
         boton_delete.value = array_datos_pedidos[0].datos[index].id_pedido;
         boton_delete.onclick = borrar_pedidos;
     }
-})
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+});
+
 function borrar_pedidos(event){
     console.log(event.target);
     event.preventDefault();
@@ -522,6 +614,36 @@ modificar_productos.addEventListener("click", function(){
     body.appendChild(section_modificar);
     // FUNCION TRAER PRODUCTOS
     modificar_get(section_modificar);
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
 });    
 
 function traerproductosparamodificar(section_modificar, datos, index){

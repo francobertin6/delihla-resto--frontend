@@ -286,6 +286,46 @@ header .navegador button{
     border: none;
     font-size: 20px;
 }
+body #advertencia{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: 80vw;
+    height: 40vw;
+    background: rgb(253, 253, 253);
+    display: block;
+    border: 2px solid black;
+}
+body #advertencia div{
+    position: absolute;
+    width: 80vw;
+    background: linear-gradient(to left, #51c286, #10572e);
+    height: 5vw;
+    color: white;
+    font-size: 3vw;
+}
+body #advertencia p{
+    position: absolute;
+    font-size: 3.5vw;
+    top: 20%;
+    width: 80vw;
+    text-align: center;
+}
+body #advertencia button{
+    position: relative;
+    display: inline-block;
+    top: 70%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    margin-left: 5vw;
+    margin-right: 5vw;
+    width: 20vw;
+    height: 5vw;
+    font-size: 3vw;
+    color: white;
+}
 /* CREAR ADMINISTRADORES */
 #crear-admin-container{
     display: flex;
