@@ -256,6 +256,7 @@ function traer_productos_for_delete(borrar_productos_container, datos, index){
     foodname.innerHTML = datos.datos[index].foodname;
     price.innerHTML = "$ "+ datos.datos[index].price;
     image.src = datos.datos[index].url;
+    button.onclick = delete_products;
 }
 
 async function get (borrar_productos_container){
@@ -267,6 +268,38 @@ async function get (borrar_productos_container){
         traer_productos_for_delete(borrar_productos_container,datos, index);
     };
 };
+
+function delete_products(){
+    let value = event.target.value;
+    let borrar_productos_container = document.getElementById("borrar-productos-container");
+    // crear advertencia
+    let contenedor_advertencia = document.createElement("div");
+    borrar_productos_container.appendChild(contenedor_advertencia);
+    let p = document.createElement("p");
+    p.innerHTML = "¿Estas seguro de querer eliminar el producto seleccionado?";
+    contenedor_advertencia.appendChild(p);
+    let button_yes = document.createElement("button");
+    button_yes.innerHTML = "SI";
+    contenedor_advertencia.appendChild(button_yes);
+    let button_no = document.createElement("button");
+    button_no.innerHTML = "NO";
+    contenedor_advertencia.appendChild(button_no);
+    //  crear advertencia finalizado
+    button_yes.addEventListener("click", function(){
+    fetch("http://127.0.0.1:3000/productos/delete?id="+ value,{
+        method: "DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    contenedor_advertencia.remove();
+});
+    button_no.addEventListener("click", function(){
+        contenedor_advertencia.remove();
+    });
+};
+
     // ADMINISTRACION BORRAR PRODUCTOS 
 
 // CREAR ADMINISTRADOR NUEVO
