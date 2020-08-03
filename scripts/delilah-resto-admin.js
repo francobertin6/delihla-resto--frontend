@@ -206,7 +206,7 @@ pedidos.addEventListener("click", function(){
 
 let borrar_productos = document.getElementById("borrar-productos");
 
-borrar_productos.addEventListener("click", function(){
+function load_delete_products(){
     administracion_section.style.display = "none";
     // container
     let borrar_productos_container = document.createElement("section");
@@ -260,8 +260,9 @@ borrar_productos.addEventListener("click", function(){
             container_pedidos.style.display = "none";
          }
     });
-    
-});
+}
+
+borrar_productos.addEventListener("click", load_delete_products);
 
 function traer_productos_for_delete(borrar_productos_container, datos, index){
     let creatediv = document.createElement("div");
@@ -329,7 +330,9 @@ function delete_products(){
         }
     })
     contenedor_advertencia.remove();
-    borrar_productos_container.style.filter = "blur(0px)";
+    borrar_productos_container.style.filter = "blur(0px)";  /* ACORDARSE: CREAR UN SIGNO DE CARGA EN LA PAGINA EN BLANCO */ 
+    borrar_productos_container.remove();
+    setTimeout(load_delete_products, 3000);
 });
     button_no.addEventListener("click", function(){
         contenedor_advertencia.remove();
@@ -343,7 +346,7 @@ function delete_products(){
 
 let create_admins = document.getElementById("crear-administrador");
 
-create_admins.addEventListener("click", function(){
+function reload_create_admins(){
     administracion_section.style.display = "none";
     let section_crear_admin = document.createElement("section");
     section_crear_admin.id = "crear-admin-container";
@@ -416,9 +419,12 @@ create_admins.addEventListener("click", function(){
             container_pedidos.style.display = "none";
         }
     });
-})
+}
+
+create_admins.addEventListener("click", reload_create_admins);
 
 function new_admins_function(event){
+    let contenedor = document.getElementById("crear-admin-container");
     event.preventDefault();
     let body = {
         "username": document.getElementById("admin").value,
@@ -433,14 +439,16 @@ function new_admins_function(event){
         },
         body: JSON.stringify(body),
     });
-}
+    contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+    setTimeout(reload_create_admins, 3000);
+};
 
     // CREAR ADMINISTRADOR NUEVO
 
 // BORRAR PEDIDOS
 let delete_pedidos = document.getElementById("borrar-pedidos");
 
-delete_pedidos.addEventListener("click", function(){
+function reload_delete_pedidos(){
     console.log(array_datos_pedidos[0].datos);
     administracion_section.style.display = "none";
     let section_borrar_pedidos = document.createElement("section");
@@ -558,9 +566,12 @@ delete_pedidos.addEventListener("click", function(){
             container_pedidos.style.display = "none";
          }
     });
-});
+}
+
+delete_pedidos.addEventListener("click", reload_delete_pedidos);
 
 function borrar_pedidos(event){
+    let contenedor = document.getElementById("borrar-pedidos-container");
     console.log(event.target);
     event.preventDefault();
     let value = event.target.value;
@@ -570,6 +581,8 @@ function borrar_pedidos(event){
             'Authorization': token
         }
     })
+    contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+    setTimeout(reload_delete_pedidos, 3000);
 }
 
     // BORRAR PEDIDOS
@@ -583,7 +596,7 @@ let arrays_divs_productos = [];
 
 let modificar_productos = document.getElementById("modificar-productos");
 
-modificar_productos.addEventListener("click", function(){
+function reload_modificar_productos(){
     administracion_section.style.display = "none";
     // DIV-HEADER
     let div_header = document.createElement("div");
@@ -644,7 +657,9 @@ modificar_productos.addEventListener("click", function(){
             container_pedidos.style.display = "none";
          }
     });
-});    
+};
+
+modificar_productos.addEventListener("click", reload_modificar_productos);    
 
 function traerproductosparamodificar(section_modificar, datos, index){
     let creatediv = document.createElement("div");
@@ -697,6 +712,8 @@ let button_modificar_productos = document.getElementsByClassName("modificar");
 
 
 function modificar_put(){
+    let header_contenedor = document.getElementById("header-modificar");
+    let contenedor = document.getElementById("info-productos");
     let value = event.target.value;
     let div_contenedor_info = document.getElementById(value).children;
     for (let index = 0; index < 4; index++) {
@@ -709,7 +726,10 @@ function modificar_put(){
             },
         })
     }
-}
+    header_contenedor.remove();
+    contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+    setTimeout(reload_modificar_productos, 3000);
+};
     // MODIFICAR PRODUCTOS
 
 // CARGAR PRODUCTOS
