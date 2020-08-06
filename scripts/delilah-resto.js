@@ -42,7 +42,7 @@ window.onload = async function(){
 
 // CREACION DE RECOMENDADOS
 async function recomendeddivs(data){
-    let section = document.getElementById("recomended");
+    let section = document.getElementById("recomended-contenedor");
     let creatediv = document.createElement("div");
     let foodname = document.createElement("h3");
     let price = document.createElement("p");
@@ -55,15 +55,17 @@ async function recomendeddivs(data){
     price.className = "recomended-price";
     image.className = "recomended-image";
     añadir_button.className = "añadir";
+    añadir_button.innerHTML = "Añadir ";
     section.appendChild(creatediv);
-    creatediv.appendChild(foodname);
-    creatediv.appendChild(price);
-    creatediv.appendChild(image);
-    creatediv.appendChild(añadir_button);
     creatediv.appendChild(span);
+    creatediv.appendChild(foodname);
+    span.appendChild(price);
+    creatediv.appendChild(image);
+    span.appendChild(añadir_button);
     foodname.innerHTML = data.datos[0].foodname;
     price.innerHTML = "$ "+ data.datos[0].price;
     image.src = data.datos[0].url;
+    añadir_button.value = data.datos[0].id;
 }
 
 function getRandomArbitrary(min, max) {
