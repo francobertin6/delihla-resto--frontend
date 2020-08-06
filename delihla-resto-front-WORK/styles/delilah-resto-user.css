@@ -49,16 +49,17 @@ header #carrito-activo{
     position: relative;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: flex-start;
-    overflow: hidden;
+    overflow: scroll;
 }
 #icons div{
-    height: 60px;
+    height: 30px;
     width: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 #icons div img{
     height: 30px;
@@ -136,8 +137,7 @@ header #carrito-activo{
     height: 300px;
     width: 100vw;
     top: 20px;
-    overflow: hidden;
-    display: inline-flex;
+    display: block;
 }
 #recomended h1{
     font-size: small;
@@ -150,37 +150,70 @@ header #carrito-activo{
     color: slategray;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-#recomended .recomended{
+#recomended #recomended-contenedor{
     position: relative;
+    height: 280px;
+    width: 100vw;
+    top: 20px;
+    overflow: scroll;
+    display: inline-flex;
+}
+#recomended #recomended-contenedor .recomended{
+    position: relative;
+    height: 250px;
+    top: 0;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+#recomended #recomended-contenedor .recomended .recomended-image{
+    position: absolute;
     height: 200px;
-    top: 50px;
-    left: -90px;
-    width: 55vw;
-    
+    width: 70vw;
+    top: 0;
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
 }
-#recomended .recomended .recomended-image{
+#recomended #recomended-contenedor .recomended .span{
     position: relative;
-    height: 150px;
-    width: 50vw;
-    top: -30px;
-    
-}
-#recomended .recomended .span{
-    position: relative;
-    width: 55vw;
-    height: 15px;
+    width: 70vw;
+    height: 50px;
+    top: 200px;
     color: white;
 }
-#recomended .recomended .recomended-foodname{
-    position: relative;
+#recomended #recomended-contenedor .recomended .recomended-foodname{
+    position: absolute;
     z-index: 2;
-    font-size: 20px;
+    font-size: 5vw;
+    text-align: start;
+    text-shadow: black 3px 3px 3px;
     color: white;
-    left: 25px;
-    top: 110px;
-    width: 20vw;
+    left: 5%;
+    top: 57%;
+    width: 60vw;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+#recomended #recomended-contenedor .recomended .span .recomended-price{
+    position: absolute;
+    left: 5%;
+    font-size: 4vw;
+    top: 35%;
+    color: black;
+}
+#recomended #recomended-contenedor .recomended .span .añadir{
+    position: absolute;
+    left: 70%;
+    top: 35%;
+    width: 20vw;
+    height: 22px;
+    color: white;
+    background: orange;
+    border-radius: 25px;
+    font-size: 3vw;
+}
+
 /*  SECTION RECOMENDED TERMINA 
     SECTION PEDIDO  */
     #pedidos{

@@ -169,31 +169,44 @@ function pedidos_put(event){
     window.location.assign("delilah-resto-admin.html");
 }
 
-// ADMINISTRACION EN ADMIN
+// HEADER NAVEGADOR BOTONES
 
 let administracion = document.getElementById("administracion");
 let administracion_section = document.getElementById("administracion-section");
 let pedidos = document.getElementById("pedidos");
+let cargar_productos_container = document.getElementById("cargar-productos-container");
+let cargar_productos = document.getElementById("cargar-producto");
+
 
 administracion.addEventListener("click", function(){
     if(administracion_section.style.display == "none"){
         container_pedidos.style.display = "none";
+        cargar_productos_container.style.display = "none";
         administracion_section.style.display = "flex";
     }
 })
 
 pedidos.addEventListener("click", function(){
-    if(administracion_section.style.display == "flex"){
+    if(container_pedidos.style.display == "none"){
         container_pedidos.style.display = "flex";
         administracion_section.style.display = "none"
+        cargar_productos_container.style.display = "none"; 
     }
 })
+
+ cargar_productos.addEventListener("click", function(){
+    if(cargar_productos_container.style.display == "none"){
+        cargar_productos_container.style.display = "flex";
+        administracion_section.style.display = "none";
+        container_pedidos.style.display = "none";
+     }
+     })
 
 // ADMINISTRACION BORRAR PRODUCTOS
 
 let borrar_productos = document.getElementById("borrar-productos");
 
-borrar_productos.addEventListener("click", function(){
+function load_delete_products(){
     administracion_section.style.display = "none";
     // container
     let borrar_productos_container = document.createElement("section");
@@ -220,7 +233,36 @@ borrar_productos.addEventListener("click", function(){
         // titulo h1
     // FUNCION GET 
     get(borrar_productos_container)
-})
+
+    // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+    pedidos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(borrar_productos_container.style.display == "flex"){
+            borrar_productos_container.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+}
+
+borrar_productos.addEventListener("click", load_delete_products);
 
 function traer_productos_for_delete(borrar_productos_container, datos, index){
     let creatediv = document.createElement("div");
@@ -243,6 +285,7 @@ function traer_productos_for_delete(borrar_productos_container, datos, index){
     foodname.innerHTML = datos.datos[index].foodname;
     price.innerHTML = "$ "+ datos.datos[index].price;
     image.src = datos.datos[index].url;
+    button.onclick = delete_products;
 }
 
 async function get (borrar_productos_container){
@@ -254,13 +297,56 @@ async function get (borrar_productos_container){
         traer_productos_for_delete(borrar_productos_container,datos, index);
     };
 };
+
+function delete_products(){
+    let value = event.target.value;
+    let borrar_productos_container = document.getElementById("borrar-productos-container");
+    borrar_productos_container.style.filter = "blur(5px)";
+    // crear advertencia
+    let contenedor_advertencia = document.createElement("div");
+    contenedor_advertencia.className = "advertencia";
+    body.appendChild(contenedor_advertencia);
+    let div = document.createElement("div");
+    div.innerHTML = "Borrar productos";
+    contenedor_advertencia.appendChild(div);
+    let p = document.createElement("p");
+    p.innerHTML = "¿Estas seguro de querer eliminar el producto seleccionado?";
+    contenedor_advertencia.appendChild(p);
+    let button_yes = document.createElement("button");
+    button_yes.innerHTML = "SI";
+    button_yes.style.background = "#51c286";
+    contenedor_advertencia.appendChild(button_yes);
+    let button_no = document.createElement("button");
+    button_no.innerHTML = "NO";
+    button_no.style.background = "red";
+    contenedor_advertencia.appendChild(button_no);
+    //  crear advertencia finalizado
+    button_yes.addEventListener("click", function(){
+    fetch("http://127.0.0.1:3000/productos/delete?id="+ value,{
+        method: "DELETE",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    contenedor_advertencia.remove();
+    borrar_productos_container.style.filter = "blur(0px)";  /* ACORDARSE: CREAR UN SIGNO DE CARGA EN LA PAGINA EN BLANCO */ 
+    borrar_productos_container.remove();
+    setTimeout(load_delete_products, 3000);
+});
+    button_no.addEventListener("click", function(){
+        contenedor_advertencia.remove();
+        borrar_productos_container.style.filter = "blur(0px)";
+    });
+};
+
     // ADMINISTRACION BORRAR PRODUCTOS 
 
 // CREAR ADMINISTRADOR NUEVO
 
 let create_admins = document.getElementById("crear-administrador");
 
-create_admins.addEventListener("click", function(){
+function reload_create_admins(){
     administracion_section.style.display = "none";
     let section_crear_admin = document.createElement("section");
     section_crear_admin.id = "crear-admin-container";
@@ -305,15 +391,76 @@ create_admins.addEventListener("click", function(){
     button_send.innerHTML = "Crear administrador";
     button_send.id = "send-admin-info";
     section_crear_admin.appendChild(button_send);
-})
+    button_send.onclick = new_admins_function;
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_crear_admin.style.display == "flex"){
+            section_crear_admin.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+        }
+    });
+}
+
+create_admins.addEventListener("click", reload_create_admins);
+
+function new_admins_function(event){
+    let contenedor = document.getElementById("crear-admin-container");
+    event.preventDefault();
+    let body = {
+        "username": document.getElementById("admin").value,
+        "password": document.getElementById("contra").value,
+    }
+    console.log(body);
+    fetch("http://127.0.0.1:3000/admin/crearadmin",{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body),
+    });
+    contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+    setTimeout(reload_create_admins, 3000);
+};
 
     // CREAR ADMINISTRADOR NUEVO
 
 // BORRAR PEDIDOS
 let delete_pedidos = document.getElementById("borrar-pedidos");
 
-delete_pedidos.addEventListener("click", function(){
-    console.log(array_datos_pedidos[0].datos);
+async function reload_delete_pedidos(){
+    // funcion GET
+    fetch('http://127.0.0.1:3000/pedidos/get-pedidos',{
+        method: "GET",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+    .then(async function(res){
+        let payload = await res.json();
+        console.log(payload);
+         // funcion GET
     administracion_section.style.display = "none";
     let section_borrar_pedidos = document.createElement("section");
     section_borrar_pedidos.id = "borrar-pedidos-container";
@@ -346,11 +493,11 @@ delete_pedidos.addEventListener("click", function(){
     let h2_estado = document.createElement("h2");
     estado_container.appendChild(h2_estado);
     h2_estado.innerHTML = "Estado";
-    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+    for (let index = 0; index < payload.datos.length; index++) {
         let estado = document.createElement("h3");
         estado.className = "estado";
         estado_container.appendChild(estado);
-        estado.innerHTML = array_datos_pedidos[0].datos[index].estado;
+        estado.innerHTML = payload.datos[index].estado;
     }
     // NUMERO DE PEDIDO
     let numero_pedido_container = document.createElement("div");
@@ -359,11 +506,11 @@ delete_pedidos.addEventListener("click", function(){
     let h2_pedido = document.createElement("h2");
     numero_pedido_container.appendChild(h2_pedido)
     h2_pedido.innerHTML = "numero";
-    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+    for (let index = 0; index < payload.datos.length; index++) {
         let pedido = document.createElement("p");
         numero_pedido_container.appendChild(pedido);
         pedido.className = "numero-pedidos";
-        pedido.innerHTML = "#" + array_datos_pedidos[0].datos[index].id_pedido;
+        pedido.innerHTML = "#" + payload.datos[index].id_pedido;
         
     }
     // HORA
@@ -373,11 +520,11 @@ delete_pedidos.addEventListener("click", function(){
     let h2_hora = document.createElement("h2");
     hora_container.appendChild(h2_hora);
     h2_hora.innerHTML = "Hora";
-    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+    for (let index = 0; index < payload.datos.length; index++) {
         let hora = document.createElement("p");
         hora_container.appendChild(hora);
         hora.className = "hora";
-        hora.innerHTML = array_datos_pedidos[0].datos[index].hora;
+        hora.innerHTML = payload.datos[index].hora;
     }
     // USUARIO
     let usuario_container = document.createElement("div");
@@ -386,20 +533,324 @@ delete_pedidos.addEventListener("click", function(){
     let h2_usuario = document.createElement("h2");
     usuario_container.appendChild(h2_usuario);
     h2_usuario.innerHTML = "Usuario";
-    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+    for (let index = 0; index < payload.datos.length; index++) {
         let usuario_p = document.createElement("p");
         usuario_p.className = "usuario_p"
         usuario_container.appendChild(usuario_p);
-        usuario_p.innerHTML = array_datos_pedidos[0].datos[index].user_fullname;        
+        usuario_p.innerHTML = payload.datos[index].user_fullname;        
     }
     // BOTON DELETE
     let boton_container = document.createElement("div");
     info_container.appendChild(boton_container);
     boton_container.className = "boton_container";
-    for (let index = 0; index < array_datos_pedidos[0].datos.length; index++) {
+    for (let index = 0; index < payload.datos.length; index++) {
         let boton_delete = document.createElement("button");
         boton_container.appendChild(boton_delete);
         boton_delete.innerHTML = "X";
-        boton_delete.value = array_datos_pedidos[0].datos[index].id_pedido;
+        boton_delete.value = payload.datos[index].id_pedido;
+        boton_delete.onclick = borrar_pedidos;
     }
-})
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_borrar_pedidos.style.display == "flex"){
+            section_borrar_pedidos.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+}
+
+delete_pedidos.addEventListener("click", reload_delete_pedidos);
+
+function borrar_pedidos(event){
+    let contenedor = document.getElementById("borrar-pedidos-container");
+    console.log(event.target);
+    event.preventDefault();
+    let value = event.target.value;
+    contenedor.style.filter = "blur(5px)";
+    // div advertencia YES/NO
+    let contenedor_advertencia = document.createElement("div");
+    contenedor_advertencia.className = "advertencia";
+    body.appendChild(contenedor_advertencia);
+    let div = document.createElement("div");
+    div.innerHTML = "Borrar pedidos";
+    contenedor_advertencia.appendChild(div);
+    let p = document.createElement("p");
+    p.innerHTML = "¿Estas seguro de querer eliminar el pedido seleccionado?";
+    contenedor_advertencia.appendChild(p);
+    let button_yes = document.createElement("button");
+    button_yes.innerHTML = "SI";
+    button_yes.style.background = "#51c286";
+    contenedor_advertencia.appendChild(button_yes);
+    let button_no = document.createElement("button");
+    button_no.innerHTML = "NO";
+    button_no.style.background = "red";
+    contenedor_advertencia.appendChild(button_no);
+    // div advertencia YES/NO
+    button_yes.addEventListener("click", function(){
+        fetch("http://127.0.0.1:3000/pedidos/delete?id=" + value,{
+        method: "DELETE",  
+        headers:{
+            'Authorization': token
+        }
+    });
+        contenedor.style.filter = "blur(0px)";
+        contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+        setTimeout(reload_delete_pedidos, 3000);
+        contenedor_advertencia.remove();
+    });
+    button_no.addEventListener("click", function(){
+        contenedor_advertencia.remove();
+        contenedor.style.filter = "blur(0px)";
+    });
+};
+
+    // BORRAR PEDIDOS
+
+// MODIFICAR PRODUCTOS
+
+// arrays
+let array_categorias = ["carne", "hamburguesa", "ensalada", "tarta", "cafe", "postre", "pizzas", "bebidas", "pastas", "sushi"];
+let arrays_divs_productos = [];
+// arrays
+
+let modificar_productos = document.getElementById("modificar-productos");
+
+function reload_modificar_productos(){
+    administracion_section.style.display = "none";
+    // DIV-HEADER
+    let div_header = document.createElement("div");
+    div_header.style.display = "flex";
+    div_header.id = "header-modificar";
+    body.appendChild(div_header);
+    // BOTON BACK
+    let back = document.createElement("input");
+    back.addEventListener("click", function(){
+        if(div_header.style.display == "flex" && section_modificar.style.display == "flex"){
+            div_header.remove();
+            section_modificar.remove();
+            administracion_section.style.display = "flex";
+        }
+    });
+    back.type = "image";
+    back.src = "./images/icons/espalda.svg";
+    div_header.appendChild(back);
+    back.className = "back-button-modificar-productos";
+    // TITULO MODIFICAR PRODUCTOS
+    let h1 = document.createElement("h1");
+    h1.innerHTML = "Modificar productos";
+    div_header.appendChild(h1);
+    // SECTION CONTENEDOR-PRODUCTOS
+    let section_modificar = document.createElement("section");
+    section_modificar.id = "info-productos";
+    section_modificar.style.display = "flex";
+    body.appendChild(section_modificar);
+    // FUNCION TRAER PRODUCTOS
+    modificar_get(section_modificar);
+
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_modificar.style.display == "flex"){
+            section_modificar.remove();
+            div_header.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+};
+
+modificar_productos.addEventListener("click", reload_modificar_productos);    
+
+function traerproductosparamodificar(section_modificar, datos, index){
+    let creatediv = document.createElement("div");
+    let foodname = document.createElement("input");
+    let price = document.createElement("input");
+    let url = document.createElement("input");
+    let categoria = document.createElement("select");
+    for (let index = 0; index < array_categorias.length; index++) {
+        const element = array_categorias[index];
+        let option = document.createElement("option");
+        option.value = element;
+        option.text = element
+        categoria.options.add(option);
+    };
+    let button = document.createElement("button");
+    creatediv.className = "productos";
+    foodname.className = "foodname";
+    price.className = "price";
+    url.className = "url";
+    categoria.className = "categoria";
+    button.className = "modificar";
+    foodname.value = datos.datos[index].foodname;
+    price.value = datos.datos[index].price;
+    url.value = datos.datos[index].url;
+    categoria.value = datos.datos[index].categoria;
+    categoria.text = datos.datos[index].categoria;
+    creatediv.id = datos.datos[index].id;
+    section_modificar.appendChild(creatediv);
+    creatediv.appendChild(foodname);
+    creatediv.appendChild(price);
+    creatediv.appendChild(url);
+    creatediv.appendChild(categoria);
+    creatediv.appendChild(button);
+    button.value = datos.datos[index].id;
+    button.innerText = "Modificar";
+    button.onclick = modificar_put;
+}
+
+async function modificar_get(section_modificar){
+        let url = 'http://127.0.0.1:3000/productos/get';
+        const resp = await fetch(url);
+        const datos = await resp.json();
+        console.log(datos);
+    for (let index = 0; index < datos.datos.length; index++) {
+        traerproductosparamodificar(section_modificar,datos,index);
+    };
+}
+
+let button_modificar_productos = document.getElementsByClassName("modificar");
+
+
+function modificar_put(){
+    let header_contenedor = document.getElementById("header-modificar");
+    let contenedor = document.getElementById("info-productos");
+    let value = event.target.value;
+    let div_contenedor_info = document.getElementById(value).children;
+    for (let index = 0; index < 4; index++) {
+        let element_classname = div_contenedor_info[index].className;
+        let element_value = div_contenedor_info[index].value;
+        fetch("http://127.0.0.1:3000/productos/put/"+ value + "?" + element_classname + "=" + element_value,{
+            method: "PUT",
+            headers:{
+                'Authorization': token
+            },
+        })
+    }
+    header_contenedor.remove();
+    contenedor.remove(); /*borra el contenedor para poderlo refrescar, ACORDARSE: HACER ANIMACION DE CARGA*/
+    setTimeout(reload_modificar_productos, 3000);
+};
+    // MODIFICAR PRODUCTOS
+
+// CARGAR PRODUCTOS
+
+let button_cargar_productos = document.getElementById("cargar-productos-submit-button");
+
+button_cargar_productos.addEventListener("click", function(event){
+    event.preventDefault();
+    let section_cargar_productos = document.getElementById("cargar-productos-container");
+    let foodname = document.getElementById("foodname").value;
+    let price = document.getElementById("price").value;
+    let url = document.getElementById("url").value;
+    let categoria = document.getElementById("list").value;
+    let body_send = {
+        "foodname": foodname,
+        "price": price,
+        "url": url,
+        "categoria": categoria
+    }
+    console.log(body_send);
+    fetch("http://127.0.0.1:3000/productos/post",{
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(body_send)
+    });
+    section_cargar_productos.style.display = "none"; 
+    producto_creado_exitosamente();
+});
+
+function producto_creado_exitosamente(){
+    let section_cargar_productos = document.getElementById("cargar-productos-container")
+    let section_pasta = document.createElement("section");
+    section_pasta.style.display = "flex";
+    let pasta = document.createElement("img");
+    let botton = document.createElement("button");
+    let h1 = document.createElement("h1");
+    h1.innerHTML = "Has creado un nuevo producto satisfactoriamente";
+    pasta.src = "./images/spaghetti-svgrepo-com.svg";
+    botton.innerHTML = "volver a crear producto";
+    botton.id = "comeback";
+    section_pasta.id = "pasta-section";
+    section_pasta.appendChild(pasta);
+    section_pasta.appendChild(botton);
+    section_pasta.appendChild(h1);
+    body.appendChild(section_pasta);
+    botton.addEventListener("click", function(){
+        section_pasta.remove();
+        section_cargar_productos.style.display = "flex";
+    });
+     // GET BACK --- PEDIDOS, ADMINISTRADOR, CARGAR PRODUCTOS
+     pedidos.addEventListener("click", function(){
+        if(section_pasta.style.display == "flex"){
+            section_pasta.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    pedidos.addEventListener("click", function(){
+        if(section_pasta.style.display == "flex"){
+            section_pasta.remove();
+            container_pedidos.style.display = "flex";
+            administracion_section.style.display = "none"
+            cargar_productos_container.style.display = "none"; 
+        }
+    });
+    
+    cargar_productos.addEventListener("click", function(){
+        if(section_pasta.style.display == "flex"){
+            section_pasta.remove();
+            cargar_productos_container.style.display = "flex";
+            administracion_section.style.display = "none";
+            container_pedidos.style.display = "none";
+         }
+    });
+};
+    // CARGAR PRODUCTOS
+
